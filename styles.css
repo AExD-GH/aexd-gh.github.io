@@ -1,0 +1,105 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('images/blob-scene-haikei.svg') no-repeat center center/cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    width: 60%;  /* 60% of the page width */
+    height: 60vh;  /* 60% of the page height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3em;  /* Larger text */
+    margin: 0.5em 0;
+}
+
+p {
+    font-size: 1.5em;
+    margin-top: 0.5em;
+}
+
+/* Contact Information Styling */
+p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Subscription Section Styling */
+.subscription {
+    margin-top: 30px;
+}
+
+.subscription h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.subscription input {
+    padding: 10px;
+    font-size: 1em;
+    margin-right: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subscription button {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscription button:hover {
+    background-color: #444;  /* Darker button on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .subscription input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
