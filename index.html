@@ -3,26 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancient Element xD</title>
-    <link rel="icon" type="image/png" href="images/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
+    <title>Your Name - Personal Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        onyx: '#2e3532',
+                        claret: '#8b2635',
+                        alabaster: '#e0e2db',
+                        timberwolf: '#d2d4c8',
+                        tea_green: '#d3efbd',
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const uniforms = {
+                time: { value: 1.0 },
+                resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                mouse: { value: new THREE.Vector2(0, 0) }
+            };
+            
+            const material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform float time;
+                    uniform vec2 resolution;
+                    uniform vec2 mouse;
+                    varying vec2 vUv;
+                    void main() {
+                        vec2 p = vUv - 0.5;
+                        float len = length(p - mouse * 0.5);
+                        float ripple = sin(10.0 * len - time * 2.0) * 0.05;
+                        vec3 color = vec3(0.2, 0.5, 0.8) + ripple;
+                        gl_FragColor = vec4(color, 1.0);
+                    }
+                `
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            camera.position.z = 1;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                uniforms.time.value += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            window.addEventListener('mousemove', (event) => {
+                uniforms.mouse.value.x = (event.clientX / window.innerWidth) * 2 - 1;
+                uniforms.mouse.value.y = (event.clientY / window.innerHeight) * 2 - 1;
+            });
+        });
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex">
+    <meta name="gptbot" content="noindex">
+    <meta name="ChatGPT-User" content="noindex">
+    <meta name="Google-Extended" content="noindex">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Website In Progress</h1>
-        <p>We're working on something amazing. Stay tuned!</p>
-
-        <!-- Contact Information -->
-        <p>For inquiries, email us at: <a href="mailto:hello@aexd.in">hello@aexd.in</a></p>
-
-        <!-- Subscription Form -->
-        <div class="subscription">
-            <h2>Stay Updated!</h2>
-            <form action="subscribe-endpoint" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
+<body class="bg-alabaster text-onyx flex flex-col justify-between min-h-screen">
+    <div class="flex flex-col items-center justify-center flex-grow p-6 relative">
+        <h1 class="text-4xl font-bold">Dinil Kumar D K</h1>
+        <p class="text-lg mt-2">Configuration Consultant | SaaS | US Healthcare</p>
+        
+        <div class="mt-4 flex space-x-4">
+            <a href="www.linkedin.com/in/dinildk" class="text-claret hover:underline">LinkedIn</a>
+            <a href="#" class="text-claret hover:underline">GitHub</a>
+            <a href="https://www.instagram.com/dinildk/" class="text-claret hover:underline">Instagram</a>
         </div>
+        
+        <div class="mt-6">
+            <a href="docs/CV.pdf" class="text-claret font-semibold hover:underline" target="_blank">View My CV</a>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-timberwolf text-center rounded-t-lg shadow-md relative">
+        <h2 class="text-2xl font-semibold">Contact Me</h2>
+        <p class="text-sm mt-2">Reach out via LinkedIn, GitHub, or Instagram. A contact form will be added soon!</p>
     </div>
 </body>
 </html>
